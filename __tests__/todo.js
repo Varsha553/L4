@@ -1,24 +1,24 @@
 let todoList = require("../todo");
-const { all, markAsComplete, add, overdue, dueToday, dueLater } = todoList();
+const { all, markAsComplete, add, overdue, dueToday, dueLater,toDisplayableList } = todoList();
 describe("Todo test cases", () => {
   beforeAll(() => {
     const today = new Date();
     const oneDay = 60 * 60 * 24 * 1000;
     [
       {
-        title: "Complete assignment",
+        title: "Maths test",
         completed: false,
         dueDate: new Date(today.getTime() - 1 * oneDay).toLocaleDateString(
           "en-CA"
         ),
       },
       {
-        title: "Go for shopping",
+        title: "Delhi tour",
         completed: false,
         dueDate: new Date().toLocaleDateString("en-CA"),
       },
       {
-        title: "Complete project",
+        title: "Visit to beauty saloon",
         completed: false,
         dueDate: new Date(today.getTime() + 1 * oneDay).toLocaleDateString(
           "en-CA"
@@ -38,21 +38,21 @@ describe("Todo test cases", () => {
     expect(all.length).toEqual(4);
   });
 
-  test("Todo mark as complete", () => {
+  test("Test for Todo mark as complete", () => {
     expect(all[0].completed).toEqual(false);
     markAsComplete(0);
     expect(all[0].completed).toEqual(true);
   });
 
-  test("Test for overdue", () => {
+  test("Test for overdue items", () => {
     expect(overdue().length).toEqual(1);
   });
 
-  test("Test due today", () => {
+  test("Test due today items", () => {
     expect(dueToday().length).toEqual(2);
   });
 
-  test("Test for due later", () => {
+  test("Test for due later items", () => {
     expect(dueLater().length).toEqual(1);
   });
 });
