@@ -8,22 +8,27 @@ const todoList = () => {
   };
 
   const overdue = () => {
-    return all.filter(
-      (todo) => todo.dueDate < new Date().toLocaleDateString("en-CA")
-    );
+    return all.filter((todo) => todo.dueDate < today);
   };
 
   const dueToday = () => {
-    return all.filter(
-      (todo) => todo.dueDate === new Date().toLocaleDateString("en-CA")
-    );
+    return all.filter((todo) => todo.dueDate == today);
   };
 
   const dueLater = () => {
-    return all.filter(
-      (todo) => todo.dueDate > new Date().toLocaleDateString("en-CA")
-    );
+    return all.filter((todo) => todo.dueDate > today);
   };
+
+  const toDisplayableList = (list) => {
+    return list
+      .map(
+        (todo) =>
+          `${todo.completed ? "[x]" : "[ ]"} ${todo.title}.trim() ${todo.dueDate == today ? "" : todo.dueDate
+          }`
+      )
+      .join("\n");
+  };
+
   return {
     all,
     add,
@@ -31,6 +36,7 @@ const todoList = () => {
     overdue,
     dueToday,
     dueLater,
+    toDisplayableList,
   };
 };
 
